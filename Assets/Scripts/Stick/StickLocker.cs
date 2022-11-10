@@ -7,6 +7,5 @@ public class StickLocker : MonoBehaviour, IStickLocker
     public void Lock()
     {
         transform.SetParent(null);
-        Debug.Log("Excuted");
     }
 }

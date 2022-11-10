@@ -1,4 +1,5 @@
-﻿public interface IPlayerMover
+﻿using UnityEngine;
+public interface IPlayerMover
 {
-    void Move();
+    void Move(Vector2 position);
 }

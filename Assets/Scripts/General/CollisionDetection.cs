@@ -4,17 +4,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CollisionDetection : MonoBehaviour
+public class CollisionDetection : MonoBehaviour, IResetCollision
 {
-    [SerializeField] private UnityEvent _onCollisionEnter;
+    public bool _collided { get; private set; } = false;
+    public Vector2 _collisionPosition { get; private set; }
+
+    public void Reset()
+    {
+        _collided = false;
+        _collisionPosition = transform.position;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<ICollidable>() != null)
         {
-            if (_onCollisionEnter != null)
-            {
-                _onCollisionEnter.Invoke();
-            }
+            _collided = true;
+            _collisionPosition = transform.position;
         }
     }
+
+
+
 }

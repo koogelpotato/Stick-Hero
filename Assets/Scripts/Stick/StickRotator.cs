@@ -10,14 +10,17 @@ public class StickRotator : MonoBehaviour, IStickRotator
     [SerializeField] private float _speedOfRotation;
     [SerializeField] private UnityEvent _onStickRotated;
     private float _currentRotation;
+
+    
+
     public void Rotate()
     {
         while (_currentRotation <= _finalRotation)
         {
             _currentRotation += _speedOfRotation * Time.deltaTime;
-            transform.localEulerAngles = new Vector3(0,0,_currentRotation);
+            transform.eulerAngles = new Vector3(0,0,_currentRotation);
         }
-        if(_onStickRotated != null)
-            _onStickRotated.Invoke();
+        if (_currentRotation >= _finalRotation)
+            _onStickRotated?.Invoke();
     }
 }

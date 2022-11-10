@@ -5,10 +5,16 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour, IPlayerMover
 {
     [SerializeField] private float _speedOfTransfer;
-    [SerializeField] private CollisionTransmitter _transmitter;
-    public void Move()
+    [SerializeField] private CollisionDetection _collisionPoint;
+
+    public void Move(Vector2 position)
     {
-        _transmitter.TransmitPosition();
-        transform.position = Vector3.Lerp(transform.position, _transmitter.ReturnPosition(), _speedOfTransfer);
+        transform.position = new Vector2(position.x, transform.position.y);
     }
+
+    private void Awake()
+    {
+        
+    }
+    
 }
