@@ -10,9 +10,6 @@ public class StickRotator : MonoBehaviour, IStickRotator
     [SerializeField] private float _speedOfRotation;
     [SerializeField] private UnityEvent _onStickRotated;
     private float _currentRotation;
-
-    
-
     public void Rotate()
     {
         while (_currentRotation <= _finalRotation)

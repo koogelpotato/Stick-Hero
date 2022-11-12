@@ -1,29 +1,25 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class GameLogic : MonoBehaviour, IGameLogic
 {
-    [SerializeField] private CollisionDetection _collisionDetection;
+    [SerializeField] private CollisionDetection _collisionDetection; //collision point of a child gameobject with 2D collider attached
     [SerializeField] private UnityEvent _onLevelPassed;
-    [SerializeField] private Stick _stick;
-
-    
+    [SerializeField] private UnityEvent _onLevelFailed;//currently unused event 
+    private void Awake()
+    {
+        
+    }
     public void Fail()
     {
-        Debug.Log("failed"); //display Fail UI
+        _onLevelFailed?.Invoke(); //display Fail UI
     }
-
     public void Pass()
     {
-        _collisionDetection.Reset();
-        _stick.GetComponent<IStickMover>().Move(_collisionDetection._collisionPosition);
-        _stick.GetComponent<IStickInstantiator>().Instantiate();
-        // TO DO Problem occurs because the gamelogic tries to access the allready used stick
+        _onLevelPassed?.Invoke();//instantiates the stick at collision point
     }
-
-    public void Determine()
+    public void Determine() // calls the functions based on whether or not the stick collided with the pillar
     {
         IEnumerator GameLoop()
         {

@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StickMover : MonoBehaviour, IStickMover
 {
-    public void Move(Vector2 position)
+    [SerializeField] private CollisionDetection _collisionDetection;
+    [SerializeField] private UnityEvent _onStickMoved;
+    public void Move(Transform stickInstance)
     {
-        transform.position = position;
+        stickInstance.transform.position = Vector3.Lerp(transform.position, _collisionDetection._collisionPosition, 1f);
+        _onStickMoved?.Invoke();
     }
 }

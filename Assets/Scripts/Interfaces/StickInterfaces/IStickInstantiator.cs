@@ -1,4 +1,4 @@
-﻿public interface IStickInstantiator
+﻿public interface IStickInitializer
 {
-    void Instantiate();
+    void Initialize();
 }
